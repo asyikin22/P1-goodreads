@@ -1,6 +1,7 @@
 import pandas as pd
 import plotly.graph_objects as go
 from dash import Dash, dcc, html, Input, Output
+import os
 
 file_path = './Goodreads.csv'
 
@@ -95,5 +96,9 @@ def update_chart(selected_genre):
 
 # default browser: http://127.0.0.1:8055
 
+# if __name__ == '__main__':
+#     app.run_server(debug=False, port=8055)
+
 if __name__ == '__main__':
-    app.run_server(debug=False, port=8055)
+    port = int(os.environ.get("PORT", 8055))  # Use the PORT environment variable, default to 8055 if not set
+    app.run_server(debug=False, port=port, host="0.0.0.0")  # Make sure to bind to 0.0.0.0
